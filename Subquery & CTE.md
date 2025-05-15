@@ -1,7 +1,52 @@
 **📌 Materi:**
 - Subquery dalam SELECT, FROM, WHERE
 - CTE (WITH)
-- CTE rekursif 
+- CTE rekursif
+---
+## Struktur table dan isi table
+### 1. Tabel `customers`
+```sql
+CREATE TABLE customers (
+  id SERIAL PRIMARY KEY,
+  name TEXT
+);
+
+INSERT INTO customers (name) VALUES
+('Alice'),
+('Bob'),
+('Charlie'),
+('Diana');
+```
+### 2. Tabel `orders`
+```sql
+CREATE TABLE orders (
+  id SERIAL PRIMARY KEY,
+  customer_id INT REFERENCES customers(id),
+  total NUMERIC
+);
+
+INSERT INTO orders (customer_id, total) VALUES
+(1, 120.00),  -- Alice
+(1, 80.00),   -- Alice
+(2, 150.00),  -- Bob
+(3, 90.00);   -- Charlie
+```
+### 3. Tabel `employees` (untuk CTE rekursif)
+```sql
+CREATE TABLE employees (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  manager_id INT REFERENCES employees(id)
+);
+
+INSERT INTO employees (name, manager_id) VALUES
+('CEO', NULL),       -- id = 1
+('CTO', 1),          -- id = 2
+('CFO', 1),          -- id = 3
+('Dev1', 2),         -- id = 4
+('Dev2', 2),         -- id = 5
+('Accountant', 3);   -- id = 6
+```
 ---
 ### 🔹 Subquery
 Subquery = Query di dalam query lain. Bisa digunakan dalam bagian `SELECT`, `FROM`, atau `WHERE`.
@@ -28,46 +73,33 @@ FROM customers
 WHERE id IN (SELECT customer_id FROM orders WHERE total > 100);
 ```
 ✅ Subquery bisa disebut juga sebagai "inner query" atau "nested query".
-### 🔹 LEFT JOIN (atau LEFT OUTER JOIN)
-Mengembalikan semua baris dari tabel kiri, dan data dari tabel kanan jika cocok. Jika tidak cocok, akan bernilai `NULL`.
+### 🔹 CTE (Common Table Expression)
+CTE digunakan untuk membuat tabel sementara bernama, dengan kata kunci `WITH`.
 ```sql
-SELECT * FROM foo LEFT JOIN bar ON foo.id = bar.id;
+WITH order_summary AS (
+  SELECT customer_id, COUNT(*) AS total_orders
+  FROM orders
+  GROUP BY customer_id
+)
+SELECT c.name, o.total_orders
+FROM customers c
+JOIN order_summary o ON c.id = o.customer_id;
 ```
-✅ Selalu tampilkan semua data dari kiri, kanan boleh `NULL`.
-### 🔹 RIGHT JOIN (atau RIGHT OUTER JOIN)
-Kebalikan dari LEFT JOIN. Mengembalikan semua baris dari **tabel kanan**, dan data dari kiri jika cocok.
+✅ CTE membuat query lebih rapi dan mudah dibaca, terutama query yang kompleks.
+### 🔹 CTE Rekursif
+Digunakan untuk query berulang pada struktur hierarkis seperti pohon (tree) atau organisasi.
 ```sql
-SELECT * FROM foo RIGHT JOIN bar ON foo.id = bar.id;
-```
-✅ Selalu tampilkan semua data dari kanan, kiri boleh `NULL`.
-### 🔹 FULL OUTER JOIN
-Menggabungkan hasil dari LEFT dan RIGHT JOIN. Semua baris dari kedua tabel dikembalikan, cocok atau tidak.
-```sql
-SELECT * FROM foo FULL OUTER JOIN bar ON foo.id = bar.id;
-```
-✅ Jika tidak cocok, sisi yang tidak ada pasangan akan `NULL`.
-### 🔹 SELF JOIN
-Digunakan untuk melakukan JOIN pada tabel itu sendiri. Contoh umum adalah struktur hierarki organisasi (bawahan vs atasan).
-```sql
-SELECT e.name AS employee, m.name AS manager
-FROM employees e
-LEFT JOIN employees m ON e.manager_id = m.id;
-```
-✅ Contoh: seorang karyawan (employee) dan manajernya (manager) dari tabel yang sama.
-### 🔹 Perbedaan `ON` vs `USING`
-#### ON
-Digunakan ketika nama kolom **berbeda**.
-```sql
-SELECT * FROM a JOIN b ON a.kode = b.kode_b;
-```
-#### USING
-Digunakan ketika nama kolom **sama** di kedua tabel.
-```sql
-SELECT * FROM a JOIN b ON a.kode = b.kode_b;
-```
-✅ lebih singkat, tapi hanya jika nama kolom sama di kedua tabel.
+WITH RECURSIVE org_chart AS (
+  SELECT id, name, manager_id, 1 AS level
+  FROM employees
+  WHERE manager_id IS NULL  -- top level (CEO)
 
-### 🛠️ Catatan Tambahan
- - `JOIN` sangat penting untuk menggabungkan data dari beberapa tabel.
- - Selalu pastikan relasi antar tabel jelas (foreign key / primary key).
- - Gunakan alias (`a`, `b`, `e`, `m`, dll) untuk meningkatkan keterbacaan query.
+  UNION ALL
+
+  SELECT e.id, e.name, e.manager_id, oc.level + 1
+  FROM employees e
+  JOIN org_chart oc ON e.manager_id = oc.id
+)
+SELECT * FROM org_chart;
+```
+✅ Rekursif artinya CTE memanggil dirinya sendiri.
