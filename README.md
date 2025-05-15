@@ -4,8 +4,6 @@ Selamat datang di sesi lanjutan SQL! Dalam sesi ini, kamu akan mempelajari konse
 
 ---
 
-## 🕒 Struktur Sesi
-
 | Sesi | Topik                             | Waktu      | Level     |
 |------|-----------------------------------|------------|-----------|
 | 1    | Recap Relasi & Join Lanjutan      | 20 menit   | Menengah  |
