@@ -2,14 +2,14 @@
 
 ---
 
-| Sesi | Topik                             | Waktu      | Level     |
-|------|-----------------------------------|------------|-----------|
-| 1    | Relasi & Join      | 20 menit   | Menengah  |
-| 2    | Subquery & CTE                    | 30 menit   | Menengah  |
-| 3    | Aggregation & Window Function     | 30 menit   | Menengah+ |
-| 4    | Indexing, Performance, EXPLAIN    | 20 menit   | Menengah  |
-| 5    | View, Function & Transaksi        | 30 menit   | Menengah+ |
-| 6    | Mini Project: Sistem inventaris    | 20 menit   | Menengah+ |
+| Sesi | Topik                             |
+|------|-----------------------------------|
+| 1    | Relasi & Join      |
+| 2    | Subquery & CTE                    |
+| 3    | Aggregation & Window Function     |
+| 4    | Indexing, Performance, EXPLAIN    |
+| 5    | View, Function & Transaksi        |
+| 6    | Mini Project: Sistem inventaris    |
 
 ---
 
