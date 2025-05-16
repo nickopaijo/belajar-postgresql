@@ -4,7 +4,7 @@
 
 | Sesi | Topik                             | Waktu      | Level     |
 |------|-----------------------------------|------------|-----------|
-| 1    | Recap Relasi & Join Lanjutan      | 20 menit   | Menengah  |
+| 1    | Relasi & Join      | 20 menit   | Menengah  |
 | 2    | Subquery & CTE                    | 30 menit   | Menengah  |
 | 3    | Aggregation & Window Function     | 30 menit   | Menengah+ |
 | 4    | Indexing, Performance, EXPLAIN    | 20 menit   | Menengah  |
