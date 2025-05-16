@@ -44,7 +44,7 @@ INSERT INTO orders (customer_id, total) VALUES
 (2, 150.00),  -- Bob
 (3, 90.00);   -- Charlie
 ```
-### 3. Tabel `employees` (untuk CTE rekursif)
+### 3. Tabel `employees`
 ```sql
 CREATE TABLE employees (
   id SERIAL PRIMARY KEY,
