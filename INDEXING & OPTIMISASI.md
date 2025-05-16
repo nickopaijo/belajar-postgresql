@@ -65,4 +65,4 @@ Seq Scan on customers ...
 | JOIN antara 2 tabel besar	    | Ya                   |
 | ORDER BY di kolom tertentu	    | Ya    |
 | Tabel kecil (sedikit baris)	    | Tidak Wajib    |
-| Kolom sering diubah/insert/update	    | Hati-hati! Bisa membuat overhead karena index terus berubah, solusinya melakukan reindex secara berkala    |
+| Kolom sering diubah/insert/update	    | Hati-hati! Bisa membuat overhead karena index terus berubah, solusinya melakukan `VACUUM` secara berkala atau `REINDEX`    |
