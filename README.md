@@ -9,7 +9,7 @@
 | 3    | Aggregation & Window Function     | 30 menit   | Menengah+ |
 | 4    | Indexing, Performance, EXPLAIN    | 20 menit   | Menengah  |
 | 5    | View, Function & Transaksi        | 30 menit   | Menengah+ |
-| 6    | Mini Project: Inventory System    | 20 menit   | Menengah+ |
+| 6    | Mini Project: Sistem inventaris    | 20 menit   | Menengah+ |
 
 ---
 
