@@ -58,3 +58,10 @@ INSERT INTO employees (name, manager_id) VALUES
 ('Accountant', 3);   -- id = 6
 ```
 ---
+
+<!-- kunci jawaban terenkripsi dengan AES256 -->
+<!-- Key: intisistemsaranasejahtera1234567 (UTF8)-->
+<!-- IV: intisistemsaranasejahtera1234567890 (UTF8)-->
+<!-- Mode: CBC -->
+<!-- Input: Raw -->
+<!-- Output: Hexadecimal -->
